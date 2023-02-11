@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body, Query
+from fastapi import FastAPI, Query
 from pydantic import BaseModel
 from suntime import Sun, SunTimeException
 import geopy.geocoders
