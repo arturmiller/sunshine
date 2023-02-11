@@ -7,9 +7,7 @@ on:
   pull_request:
     branches:
       - main
-
-env:
-  POETRY_VIRTUALENVS_IN_PROJECT: true
+  workflow_dispatch:
 
 jobs:
   test:
@@ -24,6 +22,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
 
     - name: Install dependencies
       run: |
