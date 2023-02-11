@@ -1,0 +1,42 @@
+name: Sunshine tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  POETRY_VIRTUALENVS_IN_PROJECT: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+  
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        poetry install
+
+    - name: Format code with Black
+      run: |
+        poetry run black .
+
+    - name: Format code with Ruff
+      run: |
+        poetry run ruff .
+
+    - name: Run tests
+      run: |
+        poetry run pytest
